@@ -13,7 +13,7 @@ class Product {
     this.location = "Selangor",
   });
 }
-
+/*
 List<Product> products = [
   Product(
     image: "assets/images/product_0.png",
@@ -39,3 +39,5 @@ List<Product> products = [
     bgColor: const Color(0xFFEEEEED),
   ),
 ];
+*/
+final List<Map> products = List.generate(length, (index) => null)

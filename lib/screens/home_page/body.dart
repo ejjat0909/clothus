@@ -24,16 +24,22 @@ class _BodyState extends State<Body> {
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return ProductCard();
+                return ProductCard(
+                  image: "assets/images/product_1.png",
+                  location: "",
+                  price: 56,
+                  title: "",
+                );
               },
               childCount: 10,
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-                childAspectRatio: 3 / 4,
-                mainAxisExtent: 250), // jange kurang 200
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              childAspectRatio: 3 / 4,
+              //mainAxisExtent: 250,
+            ), // jange kurang 200
           ),
         ],
       ),

@@ -4,8 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
+  final String image, title, location;
+  final double price;
   const ProductCard({
     Key? key,
+    required this.image,
+    required this.title,
+    required this.location,
+    required this.price,
   }) : super(key: key);
 
   @override
@@ -15,12 +21,12 @@ class ProductCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MyHomePage(title: "title"),
+            builder: (context) => MyHomePage(title: title),
           ),
         );
       },
       child: Container(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         width: double.infinity,
         decoration: BoxDecoration(
           color: white,
@@ -35,50 +41,48 @@ class ProductCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Image.asset(
-                "assets/images/product_0.png", //image
+                image, //image
                 height: 130,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
                   child: Text(
-                    "Long Sleeve sjhdjsd jshdj shjshd jsdh jshdjshdjsh jsh djshd jh",
+                    title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+           const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
                   child: Text(
-                    "RM " + "56.20",
-                    style: TextStyle(
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold),
+                    "RM $price",
+                    style: const TextStyle(
+                        color: primaryColor, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(
+                const Icon(
                   Icons.location_on,
                   size: 14,
                   color: Colors.black54,
                 ),
                 Expanded(
                     child: Text(
-                  "Selangor",
-                  style: TextStyle(
-                      fontSize: 10, color: Colors.black54),
+                  location,
+                  style: const TextStyle(fontSize: 10, color: Colors.black54),
                 ))
               ],
             )
