@@ -1,4 +1,5 @@
 import 'package:clothus/constant.dart';
+import 'package:clothus/screens/home_page/body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,14 +18,24 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.diamond_outlined,
+                color: primaryColor,
+                size: 30,
+              ))
+        ],
         centerTitle: true,
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: primaryColor),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
+      body: Body(),
     );
   }
 }
