@@ -21,6 +21,9 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  late double merchTotal;
+  double shipTotal = 4.50;
+  double itemTotal = 0;
   bool isPress = false;
   final TextEditingController _quantityController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -29,7 +32,8 @@ class _BodyState extends State<Body> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _quantityController.text = "0";
+    _quantityController.text = "1";
+    merchTotal = widget.price;
   }
 
   @override
@@ -134,6 +138,103 @@ class _BodyState extends State<Body> {
                     textFieldInputDecoration("Address", "ex: Taman UMP 15"),
               ),
             ),
+            const SizedBox(height: 15),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+              decoration: BoxDecoration(
+                color: white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Order Summary",
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      const Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Merchandise Subtotal",
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          "RM ${merchTotal.toStringAsFixed(2)}",
+                          style: const TextStyle(
+                              color: primaryColor, fontSize: 12),
+                          textAlign: TextAlign.right,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    children: [
+                      const Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Shipping Subtotal",
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          "RM ${shipTotal.toStringAsFixed(2)}",
+                          style: const TextStyle(
+                              color: primaryColor, fontSize: 12),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      const Expanded(
+                        flex: 3,
+                        child: Text(
+                          "Total",
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          "RM ${itemTotal.toStringAsFixed(2)}",
+                          style: const TextStyle(
+                            color: primaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -155,6 +256,10 @@ class _BodyState extends State<Body> {
               currentQuantity--;
               _quantityController.text =
                   (currentQuantity > 0 ? currentQuantity : 0).toString();
+
+              merchTotal = merchTotal < 0 ? 0 : currentQuantity * widget.price;
+
+              itemTotal = merchTotal + shipTotal;
             });
           },
           child: Container(
@@ -175,6 +280,12 @@ class _BodyState extends State<Body> {
         Expanded(
           flex: 1,
           child: TextFormField(
+            onChanged: (value) {
+              setState(() {
+                merchTotal = int.parse(value) * widget.price;
+                itemTotal = merchTotal + shipTotal;
+              });
+            },
             onTap: () {
               setState(() {
                 isPress = !isPress;
@@ -220,6 +331,8 @@ class _BodyState extends State<Body> {
               isPress = true;
               currentQuantity++;
               _quantityController.text = (currentQuantity).toString();
+              merchTotal = currentQuantity * widget.price;
+              itemTotal = merchTotal + shipTotal;
             });
           },
           child: Container(
