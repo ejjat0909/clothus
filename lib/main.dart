@@ -1,4 +1,4 @@
-import 'package:clothus/screens/home_page/home_page.dart';
+import 'package:clothus/screens/home_page/home_page_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: const HomePage(
+      home: const HomePageScreen(
         title: "ClothUs",
       ),
     );

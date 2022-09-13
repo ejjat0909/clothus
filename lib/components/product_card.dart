@@ -1,37 +1,33 @@
 import 'package:clothus/constant.dart';
 import 'package:clothus/main.dart';
+import 'package:clothus/screens/product_details/product_details_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final String image, title, location;
   final double price;
+  final Function() press;
   const ProductCard({
     Key? key,
     required this.image,
     required this.title,
     required this.location,
     required this.price,
+    required this.press,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MyHomePage(title: title),
-          ),
-        );
-      },
+      onTap: press,
       child: Container(
         padding: const EdgeInsets.all(8.0),
         width: double.infinity,
         decoration: BoxDecoration(
           color: white,
           borderRadius: BorderRadius.circular(5.0),
-          border: Border.all(color: Colors.grey),
+          //border: Border.all(color: Colors.grey),
         ),
         child: Column(
           children: [
@@ -58,12 +54,12 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-           const SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
                   child: Text(
-                    "RM $price",
+                    "RM ${price.toStringAsFixed(2)}",
                     style: const TextStyle(
                         color: primaryColor, fontWeight: FontWeight.bold),
                   ),

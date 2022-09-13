@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageScreen extends StatefulWidget {
   final String title;
-  const HomePage({super.key, required this.title});
+  const HomePageScreen({super.key, required this.title});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePageScreen> createState() => _HomePageScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Body(),
+      body: const Body(),
     );
   }
 }
