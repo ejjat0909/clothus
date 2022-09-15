@@ -250,17 +250,19 @@ class _BodyState extends State<Body> {
               _quantityController.text == "0";
             }
             int currentQuantity = int.parse(_quantityController.text);
+            if (currentQuantity > 0) {
+              setState(() {
+                isPress = true;
+                currentQuantity--;
+                _quantityController.text =
+                    (currentQuantity > 0 ? currentQuantity : 0).toString();
 
-            setState(() {
-              isPress = true;
-              currentQuantity--;
-              _quantityController.text =
-                  (currentQuantity > 0 ? currentQuantity : 0).toString();
+                merchTotal =
+                    merchTotal < 0 ? 0 : currentQuantity * widget.price;
 
-              merchTotal = merchTotal < 0 ? 0 : currentQuantity * widget.price;
-
-              itemTotal = merchTotal + shipTotal;
-            });
+                itemTotal = merchTotal + shipTotal;
+              });
+            }
           },
           child: Container(
             padding: EdgeInsets.all(1),
