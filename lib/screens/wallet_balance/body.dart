@@ -1,5 +1,6 @@
 import 'package:clothus/components/decimal_text_input.dart';
 import 'package:clothus/constant.dart';
+import 'package:clothus/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  bool isEnabled = false;
   bool isCard5Press = false;
   bool isCard10Press = false;
   bool isCard20Press = false;
@@ -94,6 +96,7 @@ class _BodyState extends State<Body> {
                             isCard50Press = false;
                             isCard100Press = false;
                             topupController.text = 5.toString();
+                            isEnabled = true;
                           });
                         }),
                         const SizedBox(width: 10),
@@ -106,6 +109,7 @@ class _BodyState extends State<Body> {
                             isCard50Press = false;
                             isCard100Press = false;
                             topupController.text = 10.toString();
+                            isEnabled = true;
                           });
                         }),
                         const SizedBox(width: 10),
@@ -118,6 +122,7 @@ class _BodyState extends State<Body> {
                             isCard50Press = false;
                             isCard100Press = false;
                             topupController.text = 20.toString();
+                            isEnabled = true;
                           });
                         }),
                       ],
@@ -134,6 +139,7 @@ class _BodyState extends State<Body> {
                             isCard50Press = false;
                             isCard100Press = false;
                             topupController.text = 30.toString();
+                            isEnabled = true;
                           });
                         }),
                         const SizedBox(width: 10),
@@ -146,6 +152,7 @@ class _BodyState extends State<Body> {
                             isCard50Press = true;
                             isCard100Press = false;
                             topupController.text = 50.toString();
+                            isEnabled = true;
                           });
                         }),
                         const SizedBox(width: 10),
@@ -161,6 +168,7 @@ class _BodyState extends State<Body> {
                               isCard50Press = false;
                               isCard100Press = true;
                               topupController.text = 100.toString();
+                              isEnabled = true;
                             });
                           },
                         ),
@@ -174,6 +182,34 @@ class _BodyState extends State<Body> {
               const SizedBox(height: 10),
               // payment gateway
               paymentGateway(),
+              const SizedBox(height: 25),
+              GestureDetector(
+                onTap: isEnabled
+                    ? () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyHomePage(title: "Topup"),
+                            ));
+                      }
+                    : null,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: isEnabled ? primaryColor : Colors.grey[600],
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Topup Now",
+                      style: TextStyle(
+                        color: white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -268,34 +304,44 @@ class _BodyState extends State<Body> {
                 setState(() {
                   isCard5Press = true;
                   isCard50Press = false;
+                  isEnabled = true;
                 });
               } else if (value == 10.toString() ||
                   value == 10.toStringAsFixed(2)) {
                 setState(() {
                   isCard10Press = true;
                   isCard100Press = false;
+                  isEnabled = true;
                 });
               } else if (value == 20.toString() ||
                   value == 20.toStringAsFixed(2)) {
                 setState(() {
                   isCard20Press = true;
+                  isEnabled = true;
                 });
               } else if (value == 30.toString() ||
                   value == 30.toStringAsFixed(2)) {
                 setState(() {
                   isCard30Press = true;
+                  isEnabled = true;
                 });
               } else if (value == 50.toString() ||
                   value == 50.toStringAsFixed(2)) {
                 setState(() {
                   isCard50Press = true;
                   isCard5Press = false;
+                  isEnabled = true;
                 });
               } else if (value == 100.toString() ||
                   value == 100.toStringAsFixed(2)) {
                 setState(() {
                   isCard100Press = true;
                   isCard10Press = false;
+                  isEnabled = true;
+                });
+              } else if (value != "") {
+                setState(() {
+                  isEnabled = true;
                 });
               } else {
                 setState(() {
@@ -305,6 +351,7 @@ class _BodyState extends State<Body> {
                   isCard30Press = false;
                   isCard50Press = false;
                   isCard100Press = false;
+                  isEnabled = false;
                 });
               }
             },
