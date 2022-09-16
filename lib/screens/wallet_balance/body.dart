@@ -167,188 +167,192 @@ class _BodyState extends State<Body> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            textAlignVertical: TextAlignVertical.bottom,
-                            onChanged: (value) {
-                              if (value == 5.toString() ||
-                                  value == 5.toStringAsFixed(2)) {
-                                setState(() {
-                                  isCard5Press = true;
-                                  isCard50Press = false;
-                                });
-                              } else if (value == 10.toString() ||
-                                  value == 10.toStringAsFixed(2)) {
-                                setState(() {
-                                  isCard10Press = true;
-                                  isCard100Press = false;
-                                });
-                              } else if (value == 20.toString() ||
-                                  value == 20.toStringAsFixed(2)) {
-                                setState(() {
-                                  isCard20Press = true;
-                                });
-                              } else if (value == 30.toString() ||
-                                  value == 30.toStringAsFixed(2)) {
-                                setState(() {
-                                  isCard30Press = true;
-                                });
-                              } else if (value == 50.toString() ||
-                                  value == 50.toStringAsFixed(2)) {
-                                setState(() {
-                                  isCard50Press = true;
-                                  isCard5Press = false;
-                                });
-                              } else if (value == 100.toString() ||
-                                  value == 100.toStringAsFixed(2)) {
-                                setState(() {
-                                  isCard100Press = true;
-                                  isCard10Press = false;
-                                });
-                              } else {
-                                setState(() {
-                                  isCard5Press = false;
-                                  isCard10Press = false;
-                                  isCard20Press = false;
-                                  isCard30Press = false;
-                                  isCard50Press = false;
-                                  isCard100Press = false;
-                                });
-                              }
-                            },
-                            onTap: () {},
-                            showCursor: true,
-                            controller: topupController,
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
-                              signed: true,
-                            ),
-                            inputFormatters: <TextInputFormatter>[
-                              //FilteringTextInputFormatter.digitsOnly,
-                              DecimalTextInputFormatter(
-                                decimalRange: 2,
-                              ) // import from decimal_text_input.dart file
-                            ],
-                            cursorColor: primaryColor,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(color: primaryColor, fontSize: 18),
-                            decoration: const InputDecoration(
-                              prefixIcon: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(
-                                  "RM ",
-                                  style: TextStyle(
-                                      fontSize: 18, color: primaryColor),
-                                ),
-                              ),
-                              prefixIconConstraints:
-                                  BoxConstraints(minWidth: 0, minHeight: 0),
-                              hintText: "Input Amount",
-                              hintStyle: TextStyle(
-                                fontSize: 18,
-                              ),
-                              isDense: true,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: bgColor),
-                                gapPadding: 10,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: bgColor),
-                                  gapPadding: 10),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(10, 10, 10, 10),
-                              border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                                gapPadding: 10,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    amountInput(),
                   ],
                 ),
               ),
               const SizedBox(height: 10),
-              // payment method
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.payments_rounded,
-                          color: primaryColor,
-                          size: 18,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          "Payment Gateway",
-                          style: TextStyle(
-                            color: primaryColor,
-                            fontSize: 12,
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    RichText(
-                      text: const TextSpan(
-                        text: "toyyib",
-                        style: TextStyle(
-                          color: toyyibPay,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: "Pay",
-                            style: TextStyle(
-                              color: toyyibPay,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Total Top Up',
-                          style: TextStyle(
-                            color: primaryColor,
-                          ),
-                        ),
-                        Text(
-                          topupController.text == ""
-                              ? "RM 0.00"
-                              : "RM ${topupController.text}",
-                          style: const TextStyle(
-                            color: primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
+              // payment gateway
+              paymentGateway(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget paymentGateway() {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              Icon(
+                Icons.payments_rounded,
+                color: primaryColor,
+                size: 18,
+              ),
+              SizedBox(width: 5),
+              Text(
+                "Payment Gateway",
+                style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 12,
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 5),
+          RichText(
+            text: const TextSpan(
+              text: "toyyib",
+              style: TextStyle(
+                color: toyyibPay,
+                fontWeight: FontWeight.w500,
+              ),
+              children: [
+                TextSpan(
+                  text: "Pay",
+                  style: TextStyle(
+                    color: toyyibPay,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Total Top Up',
+                style: TextStyle(
+                  color: primaryColor,
+                ),
+              ),
+              Text(
+                topupController.text == ""
+                    ? "RM 0.00"
+                    : "RM ${topupController.text}",
+                style: const TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Row amountInput() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Expanded(
+          child: TextFormField(
+            scrollPadding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 14 * 4),
+            textAlignVertical: TextAlignVertical.bottom,
+            onChanged: (value) {
+              if (value == 5.toString() || value == 5.toStringAsFixed(2)) {
+                setState(() {
+                  isCard5Press = true;
+                  isCard50Press = false;
+                });
+              } else if (value == 10.toString() ||
+                  value == 10.toStringAsFixed(2)) {
+                setState(() {
+                  isCard10Press = true;
+                  isCard100Press = false;
+                });
+              } else if (value == 20.toString() ||
+                  value == 20.toStringAsFixed(2)) {
+                setState(() {
+                  isCard20Press = true;
+                });
+              } else if (value == 30.toString() ||
+                  value == 30.toStringAsFixed(2)) {
+                setState(() {
+                  isCard30Press = true;
+                });
+              } else if (value == 50.toString() ||
+                  value == 50.toStringAsFixed(2)) {
+                setState(() {
+                  isCard50Press = true;
+                  isCard5Press = false;
+                });
+              } else if (value == 100.toString() ||
+                  value == 100.toStringAsFixed(2)) {
+                setState(() {
+                  isCard100Press = true;
+                  isCard10Press = false;
+                });
+              } else {
+                setState(() {
+                  isCard5Press = false;
+                  isCard10Press = false;
+                  isCard20Press = false;
+                  isCard30Press = false;
+                  isCard50Press = false;
+                  isCard100Press = false;
+                });
+              }
+            },
+            onTap: () {},
+            showCursor: true,
+            controller: topupController,
+            keyboardType: const TextInputType.numberWithOptions(
+              decimal: true,
+              signed: true,
+            ),
+            inputFormatters: <TextInputFormatter>[
+              //FilteringTextInputFormatter.digitsOnly,
+              DecimalTextInputFormatter(
+                decimalRange: 2,
+              ) // import from decimal_text_input.dart file
+            ],
+            cursorColor: primaryColor,
+            textAlign: TextAlign.start,
+            style: TextStyle(color: primaryColor, fontSize: 18),
+            decoration: const InputDecoration(
+              prefixIcon: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  "RM ",
+                  style: TextStyle(fontSize: 18, color: primaryColor),
+                ),
+              ),
+              prefixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
+              hintText: "Input Amount",
+              hintStyle: TextStyle(
+                fontSize: 18,
+              ),
+              isDense: true,
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: bgColor),
+                gapPadding: 10,
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: bgColor), gapPadding: 10),
+              contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent),
+                gapPadding: 10,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
