@@ -21,6 +21,7 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
+  bool isEnabled = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,18 +50,20 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(color: bgColor),
         child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: ((context) => MyHomePage(title: widget.title)),
-              ),
-            );
-          },
+          onTap: isEnabled
+              ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => MyHomePage(title: "checkout")),
+                    ),
+                  );
+                }
+              : null,
           child: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: isEnabled ? primaryColor : Colors.grey[600],
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Center(
