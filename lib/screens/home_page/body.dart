@@ -20,85 +20,76 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  List<Product> products = [
-    Product(
+  List<ProductModel> products = [
+    ProductModel(
       image: "assets/images/product_0.png",
       title: "Long Sleeve Shirts",
       price: 165,
-      bgColor: const Color(0xFFFEFBF9),
     ),
-    Product(
-        image: "assets/images/product_1.png",
-        title: "Casual Henley Shirts",
-        price: 99,
-        bgColor: Colors.brown),
-    Product(
+    ProductModel(
+      image: "assets/images/product_1.png",
+      title: "Casual Henley Shirts",
+      price: 99,
+    ),
+    ProductModel(
       image: "assets/images/product_2.png",
       title: "Curved Hem Shirts",
       price: 180,
-      bgColor: const Color(0xFFF8FEFB),
     ),
-    Product(
+    ProductModel(
       image: "assets/images/product_3.png",
       title: "Casual Nolin",
       price: 149,
-      bgColor: const Color(0xFFEEEEED),
     ),
-    Product(
+    ProductModel(
       image: "assets/images/product_0.png",
       title: "Long Sleeve Shirts",
       price: 165,
-      bgColor: const Color(0xFFFEFBF9),
     ),
-    Product(
-        image: "assets/images/product_1.png",
-        title: "Casual Henley Shirts",
-        price: 99,
-        bgColor: Colors.brown),
-    Product(
+    ProductModel(
+      image: "assets/images/product_1.png",
+      title: "Casual Henley Shirts",
+      price: 99,
+    ),
+    ProductModel(
       image: "assets/images/product_2.png",
       title: "Curved Hem Shirts",
       price: 180,
-      bgColor: const Color(0xFFF8FEFB),
-      location: "Kedah",
     ),
-    Product(
+    ProductModel(
       image: "assets/images/product_3.png",
       title: "Casual Nolin",
       price: 149,
-      bgColor: const Color(0xFFEEEEED),
     ),
   ];
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(10.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5.0),
         child: GridView.builder(
           physics: const BouncingScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 250,
-            childAspectRatio: 3 / 4,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
+            childAspectRatio: 1,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
             return ProductCard(
-              image: products[index].image,
-              title: products[index].title,
-              location: products[index].location,
-              price: products[index].price,
+              image: products[index].image!,
+              title: products[index].title!,
+              price: products[index].price!,
               press: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ProductDetailsScreen(
-                      title: products[index].title,
-                      image: products[index].image,
-                      price: products[index].price,
-                      
+                      title: products[index].title!,
+                      image: products[index].image!,
+                      price: products[index].price!,
                     ),
                   ),
                 );

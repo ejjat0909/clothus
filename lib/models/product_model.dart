@@ -1,19 +1,24 @@
-import 'package:flutter/material.dart';
+class ProductModel {
+  int? id;
+  String? image;
+  double? price;
+  String? title;
 
-class Product {
-  final String image, title, location;
-  final double price;
-  final Color bgColor;
+  ProductModel({this.id, this.image, this.price, this.title});
 
-  Product({
-    required this.image,
-    required this.bgColor,
-    required this.price,
-    required this.title,
-    this.location = "Selangor",
-  });
+  ProductModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    image = json['image'];
+    price = json['price'];
+    title = json['title'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['image'] = this.image;
+    data['price'] = this.price;
+    data['title'] = this.title;
+    return data;
+  }
 }
-
-
-
-

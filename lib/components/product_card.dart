@@ -5,14 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  final String image, title, location;
+  final String image, title;
   final double price;
   final Function() press;
   const ProductCard({
     Key? key,
     required this.image,
     required this.title,
-    required this.location,
     required this.price,
     required this.press,
   }) : super(key: key);
@@ -22,7 +21,7 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         width: double.infinity,
         decoration: BoxDecoration(
           color: white,
@@ -38,7 +37,7 @@ class ProductCard extends StatelessWidget {
               ),
               child: Image.asset(
                 image, //image
-                height: 130,
+                height: 100,
               ),
             ),
             const SizedBox(height: 10),
@@ -66,22 +65,6 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.location_on,
-                  size: 14,
-                  color: Colors.black54,
-                ),
-                Expanded(
-                    child: Text(
-                  location,
-                  style: const TextStyle(fontSize: 10, color: Colors.black54),
-                ))
-              ],
-            )
           ],
         ),
       ),
