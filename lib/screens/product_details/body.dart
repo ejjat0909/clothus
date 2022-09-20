@@ -21,7 +21,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(
+        Image.network(
           image,
           height: MediaQuery.of(context).size.height * 0.4, //40percent
           fit: BoxFit.cover,

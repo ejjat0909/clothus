@@ -79,7 +79,8 @@ class _BodyState extends State<Body> {
           itemCount: products.length,
           itemBuilder: (context, index) {
             return ProductCard(
-              image: products[index].image!,
+              image:
+                  "https://e7.pngegg.com/pngimages/850/755/png-clipart-toddlers-brown-and-white-bear-footie-pajama-infant-clothing-infant-clothing-romper-suit-childrens-clothing-product-kind-baby-clothes-baby-announcement-card-child-thumbnail.png",
               title: products[index].title!,
               price: products[index].price!,
               press: () {
@@ -88,7 +89,8 @@ class _BodyState extends State<Body> {
                   MaterialPageRoute(
                     builder: (context) => ProductDetailsScreen(
                       title: products[index].title!,
-                      image: products[index].image!,
+                      image:
+                          "https://e7.pngegg.com/pngimages/850/755/png-clipart-toddlers-brown-and-white-bear-footie-pajama-infant-clothing-infant-clothing-romper-suit-childrens-clothing-product-kind-baby-clothes-baby-announcement-card-child-thumbnail.png",
                       price: products[index].price!,
                     ),
                   ),
