@@ -24,19 +24,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: ColorConstant.bgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
+        title:   Text(
           "Checkout",
           style: TextStyle(
-            color: primaryColor,
+            color: ColorConstant.primaryColor,
           ),
         ),
-        leading: const BackButton(
-          color: primaryColor,
+        leading:   BackButton(
+          color: ColorConstant.primaryColor,
         ),
       ),
       body: Body(
@@ -47,7 +47,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       bottomNavigationBar: Container(
         height: 75,
         padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(color: bgColor),
+        decoration: BoxDecoration(color: ColorConstant.bgColor),
         child: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -60,14 +60,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           child: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Center(
+            child:   Center(
               child: Text(
                 "Checkout",
                 style: TextStyle(
-                  color: bgColor,
+                  color: ColorConstant.bgColor,
                 ),
               ),
             ),

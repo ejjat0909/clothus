@@ -17,15 +17,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: ColorConstant.bgColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.logout_outlined,
-            color: primaryColor,
+            color: ColorConstant.primaryColor,
             size: 30,
           ),
         ),
@@ -39,9 +39,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
               );
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.payments_outlined,
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               size: 30,
             ),
           ),
@@ -49,7 +49,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
         centerTitle: true,
         title: Text(
           "ClothUs",
-          style: TextStyle(color: primaryColor),
+          style: TextStyle(color: ColorConstant.primaryColor),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,

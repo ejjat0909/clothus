@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+//step 1 : design only
 class Body extends StatefulWidget {
   final String title;
   final double price;
@@ -23,26 +24,9 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  late double merchTotal;
-  double balance = 89.00;
-  double shipTotal = 0;
-  double shipping = 4.50;
-  double itemTotal = 0;
-  bool isPress = false;
+ 
 
-  final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _quantityController.text = "1";
-    merchTotal = widget.price;
-    itemTotal = shipTotal + merchTotal;
-    shipTotal = shipping;
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +42,7 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: white,
+                    color: ColorConstant.white,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
@@ -90,8 +74,8 @@ class _BodyState extends State<Body> {
                           widget.title,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: const TextStyle(
-                            color: primaryColor,
+                          style: TextStyle(
+                            color: ColorConstant.primaryColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -118,14 +102,11 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
-                  controller: _nameController,
-                  onChanged: ((value) {
-                    value = _nameController.text;
-                  }),
+                
                   decoration:
                       textFieldInputDecoration("Name", "ex: Hakimi Hamdan"),
                 ),
@@ -134,16 +115,13 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  controller: _addressController,
-                  onChanged: ((value) {
-                    value = _addressController.text;
-                  }),
+                 
                   decoration:
                       textFieldInputDecoration("Address", "ex: Taman UMP 15"),
                 ),
@@ -154,22 +132,22 @@ class _BodyState extends State<Body> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 decoration: BoxDecoration(
-                  color: white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(
+                     Icon(
                       Icons.payments_rounded,
-                      color: primaryColor,
+                      color: ColorConstant.primaryColor,
                       size: 20,
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Wallet Balance (RM ${balance.toStringAsFixed(2)})",
-                      style: const TextStyle(
-                        color: primaryColor,
+                      "Wallet Balance (RM ${0.toStringAsFixed(2)})",
+                      style:  TextStyle(
+                        color: ColorConstant.primaryColor,
                         fontWeight: FontWeight.w400,
                       ),
                     )
@@ -190,28 +168,28 @@ class _BodyState extends State<Body> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       decoration: BoxDecoration(
-        color: white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+           Text(
             "Order Summary",
             style: TextStyle(
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 15),
           Row(
             children: [
-              const Expanded(
+               Expanded(
                 flex: 3,
                 child: Text(
                   "Merchandise Subtotal",
                   style: TextStyle(
-                    color: primaryColor,
+                    color: ColorConstant.primaryColor,
                     fontSize: 12,
                   ),
                 ),
@@ -219,8 +197,8 @@ class _BodyState extends State<Body> {
               Expanded(
                 flex: 1,
                 child: Text(
-                  "RM ${merchTotal.toStringAsFixed(2)}",
-                  style: const TextStyle(color: primaryColor, fontSize: 12),
+                  "RM ${0.toStringAsFixed(2)}",
+                  style:  TextStyle(color: ColorConstant.primaryColor, fontSize: 12),
                   textAlign: TextAlign.right,
                 ),
               )
@@ -229,12 +207,12 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 5),
           Row(
             children: [
-              const Expanded(
+               Expanded(
                 flex: 3,
                 child: Text(
                   "Shipping Subtotal",
                   style: TextStyle(
-                    color: primaryColor,
+                    color: ColorConstant.primaryColor,
                     fontSize: 12,
                   ),
                 ),
@@ -242,8 +220,8 @@ class _BodyState extends State<Body> {
               Expanded(
                 flex: 1,
                 child: Text(
-                  "RM ${shipTotal.toStringAsFixed(2)}",
-                  style: const TextStyle(color: primaryColor, fontSize: 12),
+                  "RM ${0.toStringAsFixed(2)}",
+                  style:  TextStyle(color: ColorConstant.primaryColor, fontSize: 12),
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -252,12 +230,12 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 20),
           Row(
             children: [
-              const Expanded(
+               Expanded(
                 flex: 3,
                 child: Text(
                   "Total",
                   style: TextStyle(
-                    color: primaryColor,
+                    color: ColorConstant.primaryColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -266,9 +244,9 @@ class _BodyState extends State<Body> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  "RM ${itemTotal.toStringAsFixed(2)}",
-                  style: const TextStyle(
-                    color: primaryColor,
+                  "RM ${0.toStringAsFixed(2)}",
+                  style:  TextStyle(
+                    color: ColorConstant.primaryColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -287,41 +265,19 @@ class _BodyState extends State<Body> {
       children: [
         GestureDetector(
           onTap: () {
-            if (_quantityController.text == "") {
-              _quantityController.text == "0";
-            }
-            int currentQuantity = int.parse(_quantityController.text);
-            if (currentQuantity > 0) {
-              setState(() {
-                isPress = true;
-                currentQuantity--;
-                _quantityController.text =
-                    (currentQuantity > 0 ? currentQuantity : 0).toString();
-
-                merchTotal =
-                    merchTotal < 0 ? 0 : currentQuantity * widget.price;
-
-                shipTotal = currentQuantity > 0 ? shipping : 0;
-
-                itemTotal = merchTotal + shipTotal;
-              });
-
-              if (balance >= itemTotal) {
-                setState(() {});
-              }
-            }
+          
           },
           child: Container(
             padding: EdgeInsets.all(1),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: primaryColor,
+                color: ColorConstant.primaryColor,
               ),
             ),
-            child: const Icon(
+            child:  Icon(
               Icons.remove,
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               size: 20,
             ),
           ),
@@ -330,19 +286,13 @@ class _BodyState extends State<Body> {
           flex: 1,
           child: TextFormField(
             onChanged: (value) {
-              setState(() {
-                merchTotal = int.parse(value) * widget.price;
-                shipTotal = int.parse(value) > 0 ? shipping : 0;
-                itemTotal = merchTotal + shipTotal;
-              });
+             
             },
             onTap: () {
-              setState(() {
-                isPress = !isPress;
-              });
+            
             },
-            showCursor: isPress,
-            controller: _quantityController,
+            showCursor: true,
+           
             keyboardType: const TextInputType.numberWithOptions(
               decimal: false,
               signed: true,
@@ -350,9 +300,9 @@ class _BodyState extends State<Body> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
             ],
-            cursorColor: primaryColor,
+            cursorColor: ColorConstant.primaryColor,
             textAlign: TextAlign.center,
-            style: TextStyle(color: primaryColor, fontSize: 14),
+            style: TextStyle(color: ColorConstant.primaryColor, fontSize: 14),
             decoration: const InputDecoration(
               isDense: true,
               enabledBorder: OutlineInputBorder(
@@ -372,31 +322,18 @@ class _BodyState extends State<Body> {
         ),
         GestureDetector(
           onTap: () {
-            if (_quantityController.text == "") {
-              _quantityController.text == "0";
-            }
-            int currentQuantity = int.parse(_quantityController.text);
-
-            setState(() {
-              isPress = true;
-              currentQuantity++;
-              _quantityController.text = (currentQuantity).toString();
-              merchTotal = currentQuantity * widget.price;
-              shipTotal = currentQuantity > 0 ? shipping : 0;
-              itemTotal = merchTotal + shipTotal;
-            });
           },
           child: Container(
             padding: EdgeInsets.all(1),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: primaryColor,
+                color: ColorConstant.primaryColor,
               ),
             ),
             child: Icon(
               Icons.add,
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               size: 20,
             ),
           ),

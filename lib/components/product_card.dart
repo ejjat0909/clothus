@@ -24,7 +24,7 @@ class ProductCard extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: white,
+          color: ColorConstant.white,
           borderRadius: BorderRadius.circular(5.0),
           //border: Border.all(color: Colors.grey),
         ),
@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Image.asset(
+              child: Image.network(
                 image, //image
                 height: MediaQuery.of(context).size.height * 0.12,
               ),
@@ -59,8 +59,8 @@ class ProductCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "RM ${price.toStringAsFixed(2)}",
-                    style: const TextStyle(
-                        color: primaryColor, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: ColorConstant.primaryColor, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

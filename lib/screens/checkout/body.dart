@@ -58,7 +58,7 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: white,
+                    color: ColorConstant.white,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
@@ -75,12 +75,13 @@ class _BodyState extends State<Body> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Image.asset(
+                      child: Image.network(
                         widget.image,
                         fit: BoxFit.fitWidth,
                         height: 100,
                       ),
                     ),
+                    SizedBox(width: 10),
                     Expanded(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,8 +91,8 @@ class _BodyState extends State<Body> {
                           widget.title,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: const TextStyle(
-                            color: primaryColor,
+                          style: TextStyle(
+                            color: ColorConstant.primaryColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -118,7 +119,7 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
@@ -134,7 +135,7 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
@@ -154,22 +155,22 @@ class _BodyState extends State<Body> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 decoration: BoxDecoration(
-                  color: white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.payments_rounded,
-                      color: primaryColor,
+                      color: ColorConstant.primaryColor,
                       size: 20,
                     ),
                     const SizedBox(width: 10),
                     Text(
                       "Wallet Balance (RM ${balance.toStringAsFixed(2)})",
-                      style: const TextStyle(
-                        color: primaryColor,
+                      style: TextStyle(
+                        color: ColorConstant.primaryColor,
                         fontWeight: FontWeight.w400,
                       ),
                     )
@@ -190,28 +191,28 @@ class _BodyState extends State<Body> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       decoration: BoxDecoration(
-        color: white,
+        color: ColorConstant.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Order Summary",
             style: TextStyle(
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 15),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 flex: 3,
                 child: Text(
                   "Merchandise Subtotal",
                   style: TextStyle(
-                    color: primaryColor,
+                    color: ColorConstant.primaryColor,
                     fontSize: 12,
                   ),
                 ),
@@ -220,7 +221,8 @@ class _BodyState extends State<Body> {
                 flex: 1,
                 child: Text(
                   "RM ${merchTotal.toStringAsFixed(2)}",
-                  style: const TextStyle(color: primaryColor, fontSize: 12),
+                  style: TextStyle(
+                      color: ColorConstant.primaryColor, fontSize: 12),
                   textAlign: TextAlign.right,
                 ),
               )
@@ -229,12 +231,12 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 5),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 flex: 3,
                 child: Text(
                   "Shipping Subtotal",
                   style: TextStyle(
-                    color: primaryColor,
+                    color: ColorConstant.primaryColor,
                     fontSize: 12,
                   ),
                 ),
@@ -243,7 +245,8 @@ class _BodyState extends State<Body> {
                 flex: 1,
                 child: Text(
                   "RM ${shipTotal.toStringAsFixed(2)}",
-                  style: const TextStyle(color: primaryColor, fontSize: 12),
+                  style: TextStyle(
+                      color: ColorConstant.primaryColor, fontSize: 12),
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -252,12 +255,12 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 20),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 flex: 3,
                 child: Text(
                   "Total",
                   style: TextStyle(
-                    color: primaryColor,
+                    color: ColorConstant.primaryColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -267,8 +270,8 @@ class _BodyState extends State<Body> {
                 flex: 2,
                 child: Text(
                   "RM ${itemTotal.toStringAsFixed(2)}",
-                  style: const TextStyle(
-                    color: primaryColor,
+                  style: TextStyle(
+                    color: ColorConstant.primaryColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -316,12 +319,12 @@ class _BodyState extends State<Body> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: primaryColor,
+                color: ColorConstant.primaryColor,
               ),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.remove,
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               size: 20,
             ),
           ),
@@ -350,9 +353,9 @@ class _BodyState extends State<Body> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
             ],
-            cursorColor: primaryColor,
+            cursorColor: ColorConstant.primaryColor,
             textAlign: TextAlign.center,
-            style: TextStyle(color: primaryColor, fontSize: 14),
+            style: TextStyle(color: ColorConstant.primaryColor, fontSize: 14),
             decoration: const InputDecoration(
               isDense: true,
               enabledBorder: OutlineInputBorder(
@@ -391,12 +394,12 @@ class _BodyState extends State<Body> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: primaryColor,
+                color: ColorConstant.primaryColor,
               ),
             ),
             child: Icon(
               Icons.add,
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               size: 20,
             ),
           ),

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+// step 1: design onlyy
 class Body extends StatefulWidget {
   const Body({super.key});
 
@@ -15,29 +16,15 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  bool isEnabled = false;
-  bool isCard5Press = false;
-  bool isCard10Press = false;
-  bool isCard20Press = false;
-  bool isCard30Press = false;
-  bool isCard50Press = false;
-  bool isCard100Press = false;
-  Color hintColor = ColorConstant.primaryColor.withOpacity(0.33);
-  var topupController = TextEditingController();
-  double balance = 89;
-  @override
-  void initState() {
-    topupController.text == 0.toStringAsFixed(2);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      // widget for wrap the child to to have border radius
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
+        // widget for scrolling
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -47,7 +34,7 @@ class _BodyState extends State<Body> {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                decoration:  BoxDecoration(
+                decoration:   BoxDecoration(
                   color: ColorConstant.white,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -78,7 +65,7 @@ class _BodyState extends State<Body> {
                 padding: const EdgeInsets.all(10),
                 decoration:   BoxDecoration(
                   color: ColorConstant.white,
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),
                   ),
@@ -87,91 +74,21 @@ class _BodyState extends State<Body> {
                   children: [
                     Row(
                       children: [
-                        topupCard(5, isPress: isCard5Press, press: () {
-                          setState(() {
-                            isCard5Press = true;
-                            isCard10Press = false;
-                            isCard20Press = false;
-                            isCard30Press = false;
-                            isCard50Press = false;
-                            isCard100Press = false;
-                            topupController.text = 5.toString();
-                            isEnabled = true;
-                          });
-                        }),
+                        topupCard(5),
                         const SizedBox(width: 10),
-                        topupCard(10, isPress: isCard10Press, press: () {
-                          setState(() {
-                            isCard5Press = false;
-                            isCard10Press = true;
-                            isCard20Press = false;
-                            isCard30Press = false;
-                            isCard50Press = false;
-                            isCard100Press = false;
-                            topupController.text = 10.toString();
-                            isEnabled = true;
-                          });
-                        }),
+                        topupCard(10),
                         const SizedBox(width: 10),
-                        topupCard(20, isPress: isCard20Press, press: () {
-                          setState(() {
-                            isCard5Press = false;
-                            isCard10Press = false;
-                            isCard20Press = true;
-                            isCard30Press = false;
-                            isCard50Press = false;
-                            isCard100Press = false;
-                            topupController.text = 20.toString();
-                            isEnabled = true;
-                          });
-                        }),
+                        topupCard(20),
                       ],
                     ),
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        topupCard(30, isPress: isCard30Press, press: () {
-                          setState(() {
-                            isCard5Press = false;
-                            isCard10Press = false;
-                            isCard20Press = false;
-                            isCard30Press = true;
-                            isCard50Press = false;
-                            isCard100Press = false;
-                            topupController.text = 30.toString();
-                            isEnabled = true;
-                          });
-                        }),
+                        topupCard(30),
                         const SizedBox(width: 10),
-                        topupCard(50, isPress: isCard50Press, press: () {
-                          setState(() {
-                            isCard5Press = false;
-                            isCard10Press = false;
-                            isCard20Press = false;
-                            isCard30Press = false;
-                            isCard50Press = true;
-                            isCard100Press = false;
-                            topupController.text = 50.toString();
-                            isEnabled = true;
-                          });
-                        }),
+                        topupCard(50),
                         const SizedBox(width: 10),
-                        topupCard(
-                          100,
-                          isPress: isCard100Press,
-                          press: () {
-                            setState(() {
-                              isCard5Press = false;
-                              isCard10Press = false;
-                              isCard20Press = false;
-                              isCard30Press = false;
-                              isCard50Press = false;
-                              isCard100Press = true;
-                              topupController.text = 100.toString();
-                              isEnabled = true;
-                            });
-                          },
-                        ),
+                        topupCard(100),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -184,21 +101,13 @@ class _BodyState extends State<Body> {
               paymentGateway(),
               const SizedBox(height: 25),
               GestureDetector(
-                onTap: isEnabled
-                    ? () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyHomePage(title: "Topup"),
-                            ));
-                      }
-                    : null,
+                onTap: () {},
                 child: Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: isEnabled ? ColorConstant.primaryColor : Colors.grey[600],
+                    color: ColorConstant.primaryColor,
                   ),
                   child:   Center(
                     child: Text(
@@ -269,18 +178,16 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-                  Text(
+            children:   [
+              Text(
                 'Total Top Up',
                 style: TextStyle(
                   color: ColorConstant.primaryColor,
                 ),
               ),
               Text(
-                topupController.text == ""
-                    ? "RM 0.00"
-                    : "RM ${topupController.text}",
-                style:   TextStyle(
+                "RM 0.00",
+                style: TextStyle(
                   color: ColorConstant.primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
@@ -292,7 +199,8 @@ class _BodyState extends State<Body> {
     );
   }
 
-  Row amountInput() {
+// textfield to enter RM amount
+  Widget amountInput() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -301,78 +209,17 @@ class _BodyState extends State<Body> {
             scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom + 14 * 4),
             textAlignVertical: TextAlignVertical.bottom,
-            onChanged: (value) {
-              if (value == 5.toString() || value == 5.toStringAsFixed(2)) {
-                setState(() {
-                  isCard5Press = true;
-                  isCard50Press = false;
-                  isEnabled = true;
-                });
-              } else if (value == 10.toString() ||
-                  value == 10.toStringAsFixed(2)) {
-                setState(() {
-                  isCard10Press = true;
-                  isCard100Press = false;
-                  isEnabled = true;
-                });
-              } else if (value == 20.toString() ||
-                  value == 20.toStringAsFixed(2)) {
-                setState(() {
-                  isCard20Press = true;
-                  isEnabled = true;
-                });
-              } else if (value == 30.toString() ||
-                  value == 30.toStringAsFixed(2)) {
-                setState(() {
-                  isCard30Press = true;
-                  isEnabled = true;
-                });
-              } else if (value == 50.toString() ||
-                  value == 50.toStringAsFixed(2)) {
-                setState(() {
-                  isCard50Press = true;
-                  isCard5Press = false;
-                  isEnabled = true;
-                });
-              } else if (value == 100.toString() ||
-                  value == 100.toStringAsFixed(2)) {
-                setState(() {
-                  isCard100Press = true;
-                  isCard10Press = false;
-                  isEnabled = true;
-                });
-              } else if (value != "") {
-                setState(() {
-                  isEnabled = true;
-                });
-              } else {
-                setState(() {
-                  isCard5Press = false;
-                  isCard10Press = false;
-                  isCard20Press = false;
-                  isCard30Press = false;
-                  isCard50Press = false;
-                  isCard100Press = false;
-                  isEnabled = false;
-                });
-              }
-            },
+            onChanged: (value) {},
             onTap: () {},
             showCursor: true,
-            controller: topupController,
             keyboardType: const TextInputType.numberWithOptions(
               decimal: true,
               signed: true,
             ),
-            inputFormatters: <TextInputFormatter>[
-              //FilteringTextInputFormatter.digitsOnly,
-              DecimalTextInputFormatter(
-                decimalRange: 2,
-              ) // import from decimal_text_input.dart file
-            ],
+          
             cursorColor: ColorConstant.primaryColor,
             textAlign: TextAlign.start,
-            style: TextStyle(color: ColorConstant.primaryColor, fontSize: 18),
+            style:   TextStyle(color: ColorConstant.primaryColor, fontSize: 18),
             decoration:   InputDecoration(
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -435,7 +282,7 @@ class _BodyState extends State<Body> {
           ),
           const SizedBox(height: 25),
           Text(
-            "RM ${balance.toStringAsFixed(2)}",
+            "RM ${0.toStringAsFixed(2)}",
             style:   TextStyle(
               color: ColorConstant.bgColor,
               fontWeight: FontWeight.bold,

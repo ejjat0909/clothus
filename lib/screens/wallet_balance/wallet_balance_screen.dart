@@ -17,10 +17,10 @@ class _WalletBalanceScreenState extends State<WalletBalanceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: ColorConstant.bgColor,
       appBar: AppBar(
-        leading: const BackButton(
-          color: primaryColor,
+        leading:   BackButton(
+          color: ColorConstant.primaryColor,
         ),
         actions: [
           IconButton(
@@ -32,19 +32,19 @@ class _WalletBalanceScreenState extends State<WalletBalanceScreen> {
                   ),
                 );
               },
-              icon: const Icon(
+              icon:   Icon(
                 Icons.history,
-                color: primaryColor,
+                color: ColorConstant.primaryColor,
                 size: 30,
               ))
         ],
         backgroundColor: Colors.transparent,
         centerTitle: true,
         elevation: 0,
-        title: const Text(
+        title:   Text(
           "Wallet",
           style: TextStyle(
-            color: primaryColor,
+            color: ColorConstant.primaryColor,
           ),
         ),
       ),

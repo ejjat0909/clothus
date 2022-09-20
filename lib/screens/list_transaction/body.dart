@@ -47,20 +47,20 @@ class ListTransactionCard extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: white,
+        color: ColorConstant.white,
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
+            decoration:   BoxDecoration(
               shape: BoxShape.circle,
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
             ),
             child: Center(
               child: Icon(
                 status ? Icons.add_card_rounded : Icons.shopping_bag_outlined,
-                color: white,
+                color: ColorConstant.white,
               ),
             ),
           ),
@@ -71,8 +71,8 @@ class ListTransactionCard extends StatelessWidget {
                 status
                     ? "Wallet Topup (RM ${100.toStringAsFixed(2)})"
                     : "Shopping (RM ${99.toStringAsFixed(2)})",
-                style: const TextStyle(
-                  color: primaryColor,
+                style:   TextStyle(
+                  color: ColorConstant.primaryColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),

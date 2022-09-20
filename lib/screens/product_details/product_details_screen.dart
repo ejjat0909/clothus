@@ -23,12 +23,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: ColorConstant.bgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: const BackButton(
-          color: primaryColor,
+        leading:   BackButton(
+          color: ColorConstant.primaryColor,
         ),
       ),
       body: Body(
@@ -39,7 +39,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       bottomNavigationBar: Container(
         height: 75,
         padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(color: white),
+        decoration: BoxDecoration(color: ColorConstant.white),
         child: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -56,14 +56,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           child: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: ColorConstant.primaryColor,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Center(
+            child:   Center(
               child: Text(
                 "Buy Now",
                 style: TextStyle(
-                  color: bgColor,
+                  color: ColorConstant.bgColor,
                 ),
               ),
             ),

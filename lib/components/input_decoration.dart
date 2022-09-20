@@ -16,12 +16,12 @@ InputDecoration textFieldInputDecoration(
     prefixIcon: prefixIcon,
     hintText: hintText,
     hintStyle: TextStyle(
-      color: primaryColor.withOpacity(0.33),
+      color: ColorConstant.primaryColor.withOpacity(0.33),
       fontSize: 13,
     ),
     labelText: labelText,
     labelStyle: TextStyle(
-      color: primaryColor.withOpacity(0.33),
+      color: ColorConstant.primaryColor.withOpacity(0.33),
       fontSize: 12,
     ),
     floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -29,7 +29,7 @@ InputDecoration textFieldInputDecoration(
     focusedBorder: OutlineInputBorder(
       gapPadding: 1,
       borderRadius: BorderRadius.circular(8.0),
-      borderSide: const BorderSide(color: primaryColor, width: 1.0),
+      borderSide:  BorderSide(color: ColorConstant.primaryColor, width: 1.0),
     ),
     focusedErrorBorder: OutlineInputBorder(
       gapPadding: 1,

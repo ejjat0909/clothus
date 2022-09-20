@@ -24,7 +24,7 @@ class _ColorDotState extends State<ColorDot> {
       padding: EdgeInsets.all(4),
       decoration: BoxDecoration(
         border: Border.all(
-          color: widget.isActive ? primaryColor : Colors.transparent,
+          color: widget.isActive ? ColorConstant.primaryColor : Colors.transparent,
         ),
         shape: BoxShape.circle,
       ),

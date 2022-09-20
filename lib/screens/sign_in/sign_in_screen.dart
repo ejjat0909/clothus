@@ -18,7 +18,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: ColorConstant.bgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -54,10 +54,10 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 children: [
                   RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: "Cloth",
                       style: TextStyle(
-                        color: primaryColor,
+                        color: ColorConstant.primaryColor,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.italic,
                         fontSize: 60,
@@ -66,7 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         TextSpan(
                           text: "Us",
                           style: TextStyle(
-                            color: primaryColor,
+                            color: ColorConstant.primaryColor,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.normal,
                           ),
@@ -76,11 +76,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   const SizedBox(height: 10),
                   // Title
-                  const Text(
+                  Text(
                     "Welcome back to Clothus, \n You've been missed",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: primaryColor,
+                      color: ColorConstant.primaryColor,
                       fontSize: 16,
                     ),
                   ),
@@ -90,8 +90,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(20),
-                      decoration: const BoxDecoration(
-                        color: white,
+                      decoration: BoxDecoration(
+                        color: ColorConstant.white,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(25),
                           topRight: Radius.circular(25),
@@ -127,15 +127,15 @@ class _SignInScreenState extends State<SignInScreen> {
                                       child: Container(
                                         padding: EdgeInsets.all(15),
                                         decoration: BoxDecoration(
-                                          color: primaryColor,
+                                          color: ColorConstant.primaryColor,
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
-                                        child: const Center(
+                                        child: Center(
                                           child: Text(
                                             "Sign In",
                                             style: TextStyle(
-                                              color: bgColor,
+                                              color: ColorConstant.bgColor,
                                             ),
                                           ),
                                         ),
