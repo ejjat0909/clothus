@@ -1,5 +1,6 @@
 import 'package:clothus/components/color_dot.dart';
 import 'package:clothus/constant.dart';
+import 'package:clothus/models/product/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -8,21 +9,17 @@ import 'package:flutter/src/widgets/framework.dart';
 class Body extends StatelessWidget {
   const Body({
     Key? key,
-    required this.image,
-    required this.title,
-    required this.price,
+    required this.productModel,
   }) : super(key: key);
 
-  final String title;
-  final double price;
-  final String image;
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Image.network(
-          image,
+          productModel.image!,
           height: MediaQuery.of(context).size.height * 0.4, //40percent
           fit: BoxFit.cover,
         ),
@@ -31,7 +28,7 @@ class Body extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration:   BoxDecoration(
+            decoration: BoxDecoration(
               color: ColorConstant.white,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(30),
@@ -45,20 +42,22 @@ class Body extends StatelessWidget {
                 children: [
                   const SizedBox(height: 10),
                   Text(
-                    title,
-                    style:   TextStyle(color: ColorConstant.primaryColor, fontSize: 16),
+                    productModel.title!,
+                    style: TextStyle(
+                        color: ColorConstant.primaryColor, fontSize: 16),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "RM ${price.toStringAsFixed(2)}",
-                    style:   TextStyle(color: ColorConstant.primaryColor, fontSize: 16),
+                    "RM ${productModel.price!}",
+                    style: TextStyle(
+                        color: ColorConstant.primaryColor, fontSize: 16),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
                   const SizedBox(height: 20),
-                    Text(
+                  Text(
                     "Colors",
                     style: TextStyle(
                         color: ColorConstant.primaryColor,

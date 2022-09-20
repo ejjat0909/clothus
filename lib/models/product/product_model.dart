@@ -1,7 +1,7 @@
 class ProductModel {
   int? id;
   String? image;
-  double? price;
+  String? price;
   String? title;
 
   ProductModel({this.id, this.image, this.price, this.title});

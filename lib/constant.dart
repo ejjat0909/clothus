@@ -9,4 +9,4 @@ class ColorConstant {
   static Color toyyibPay = Color.fromRGBO(98, 78, 196, 1);
 }
 
-const rootUrl = "training.mahirandigital.com/api/";
+const rootUrl = "http://training.mahirandigital.com/api/";

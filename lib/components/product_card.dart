@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final String image, title;
-  final double price;
+  final String price;
   final Function() press;
   const ProductCard({
     Key? key,
@@ -58,9 +58,10 @@ class ProductCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "RM ${price.toStringAsFixed(2)}",
+                    "RM $price",
                     style: TextStyle(
-                        color: ColorConstant.primaryColor, fontWeight: FontWeight.bold),
+                        color: ColorConstant.primaryColor,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

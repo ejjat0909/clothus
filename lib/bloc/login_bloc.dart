@@ -1,27 +1,19 @@
 import 'package:clothus/helpers/http_response.dart';
 import 'package:clothus/helpers/secure_shared_preferences.dart';
+import 'package:clothus/models/default_response_model.dart';
+import 'package:clothus/models/user/login_request_model.dart';
 import 'package:clothus/models/user/user_response_model.dart';
 import 'package:clothus/resource/user_resource.dart';
-import 'package:clothus/screens/sign_in/sign_in_screen.dart';
 import 'package:clothus/services/web_services.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class LoginBloc {
-  void signOut(context) async {
+  Future<DefaultResponseModel> logout() async {
     // Revoked User Token
-    await Webservice.get(UserResource.logout());
-
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: ((context) => SignInScreen()),
-        ),
-        (Route<dynamic> route) => false);
+    return await Webservice.get(UserResource.logout());
   }
 
-  Future<UserResponseModel> login(String email, String password) async {
+  Future<UserResponseModel> login(LoginRequestModel loginModel) async {
     // Call the API to login
-    return await Webservice.post(UserResource.login(email, password));
+    return await Webservice.post(UserResource.login(loginModel));
   }
 }

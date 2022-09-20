@@ -115,6 +115,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ),
                                     const SizedBox(height: 20),
                                     TextFieldBlocBuilder(
+                                      obscureText: true,
                                       textFieldBloc: loginFormBloc.password,
                                       decoration: textFieldInputDecoration(
                                           "Password", ""),

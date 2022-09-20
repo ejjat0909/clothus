@@ -1,5 +1,7 @@
 import 'package:clothus/bloc/login_bloc.dart';
 import 'package:clothus/helpers/secure_shared_preferences.dart';
+import 'package:clothus/models/user/login_request_model.dart';
+import 'package:clothus/models/user/user_model.dart';
 import 'package:clothus/models/user/user_response_model.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 
@@ -9,6 +11,7 @@ class LoginFormBloc extends FormBloc<String, String> {
 
   // For email field
   final email = TextFieldBloc(
+    initialValue: "test@example.com",
     validators: [
       FieldBlocValidators.required,
       FieldBlocValidators.email,
@@ -17,6 +20,7 @@ class LoginFormBloc extends FormBloc<String, String> {
 
   // For password field
   final password = TextFieldBloc(
+    initialValue: "password",
     validators: [
       FieldBlocValidators.required,
     ],
@@ -37,8 +41,8 @@ class LoginFormBloc extends FormBloc<String, String> {
   void onSubmitting() async {
     try {
       // Call API to Login
-      UserResponseModel userResponseModel =
-          await loginBloc.login(email.value.trim(), password.value);
+      UserResponseModel userResponseModel = await loginBloc.login(
+          LoginRequestModel(email: email.value, password: password.value));
 
       // Handle API response
       if (userResponseModel.isSuccess &&

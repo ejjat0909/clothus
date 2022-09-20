@@ -1,4 +1,6 @@
+import 'package:clothus/bloc/login_bloc.dart';
 import 'package:clothus/constant.dart';
+import 'package:clothus/models/default_response_model.dart';
 import 'package:clothus/screens/home_page/body.dart';
 import 'package:clothus/screens/sign_in/sign_in_screen.dart';
 import 'package:clothus/screens/wallet_balance/wallet_balance_screen.dart';
@@ -20,8 +22,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
       backgroundColor: ColorConstant.bgColor,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
+          onPressed: () async {
+            // Handle Logout
+            LoginBloc loginBloc = LoginBloc();
+            await loginBloc.logout();
+
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: ((context) => SignInScreen()),
+                ),
+                (Route<dynamic> route) => false);
           },
           icon: Icon(
             Icons.logout_outlined,

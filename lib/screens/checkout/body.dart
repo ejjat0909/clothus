@@ -1,5 +1,6 @@
 import 'package:clothus/components/input_decoration.dart';
 import 'package:clothus/constant.dart';
+import 'package:clothus/models/product/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,15 +8,17 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Body extends StatefulWidget {
-  final String title;
-  final double price;
-  final String image;
+  final ProductModel productModel;
+  final TextEditingController quantityController;
+  final TextEditingController nameController;
+  final TextEditingController addressController;
 
   const Body({
     super.key,
-    required this.title,
-    required this.price,
-    required this.image,
+    required this.productModel,
+    required this.quantityController,
+    required this.nameController,
+    required this.addressController,
   });
 
   @override
@@ -28,18 +31,16 @@ class _BodyState extends State<Body> {
   double shipTotal = 0;
   double shipping = 4.50;
   double itemTotal = 0;
+  double price = 0;
   bool isPress = false;
-
-  final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _quantityController.text = "1";
-    merchTotal = widget.price;
+    widget.quantityController.text = "1";
+    price = double.parse(widget.productModel.price!);
+    merchTotal = price;
     itemTotal = shipTotal + merchTotal;
     shipTotal = shipping;
   }
@@ -76,7 +77,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Image.network(
-                        widget.image,
+                        widget.productModel.image!,
                         fit: BoxFit.fitWidth,
                         height: 100,
                       ),
@@ -88,7 +89,7 @@ class _BodyState extends State<Body> {
                       children: [
                         const SizedBox(height: 10),
                         Text(
-                          widget.title,
+                          widget.productModel.title!,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
@@ -97,7 +98,7 @@ class _BodyState extends State<Body> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Text("RM ${widget.price.toStringAsFixed(2)}"),
+                        Text("RM ${widget.productModel.price}"),
                         const SizedBox(height: 10),
                         Row(
                           children: [
@@ -123,10 +124,10 @@ class _BodyState extends State<Body> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
-                  controller: _nameController,
-                  onChanged: ((value) {
-                    value = _nameController.text;
-                  }),
+                  controller: widget.nameController,
+                  // onChanged: ((value) {
+                  //   value = widget.nameController.text;
+                  // }),
                   decoration:
                       textFieldInputDecoration("Name", "ex: Hakimi Hamdan"),
                 ),
@@ -141,10 +142,10 @@ class _BodyState extends State<Body> {
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  controller: _addressController,
-                  onChanged: ((value) {
-                    value = _addressController.text;
-                  }),
+                  controller: widget.addressController,
+                  // onChanged: ((value) {
+                  //   value = widget.addressController.text;
+                  // }),
                   decoration:
                       textFieldInputDecoration("Address", "ex: Taman UMP 15"),
                 ),
@@ -290,19 +291,18 @@ class _BodyState extends State<Body> {
       children: [
         GestureDetector(
           onTap: () {
-            if (_quantityController.text == "") {
-              _quantityController.text == "0";
+            if (widget.quantityController.text == "") {
+              widget.quantityController.text == "0";
             }
-            int currentQuantity = int.parse(_quantityController.text);
+            int currentQuantity = int.parse(widget.quantityController.text);
             if (currentQuantity > 0) {
               setState(() {
                 isPress = true;
                 currentQuantity--;
-                _quantityController.text =
+                widget.quantityController.text =
                     (currentQuantity > 0 ? currentQuantity : 0).toString();
 
-                merchTotal =
-                    merchTotal < 0 ? 0 : currentQuantity * widget.price;
+                merchTotal = merchTotal < 0 ? 0 : currentQuantity * price;
 
                 shipTotal = currentQuantity > 0 ? shipping : 0;
 
@@ -334,7 +334,7 @@ class _BodyState extends State<Body> {
           child: TextFormField(
             onChanged: (value) {
               setState(() {
-                merchTotal = int.parse(value) * widget.price;
+                merchTotal = int.parse(value) * price;
                 shipTotal = int.parse(value) > 0 ? shipping : 0;
                 itemTotal = merchTotal + shipTotal;
               });
@@ -345,7 +345,7 @@ class _BodyState extends State<Body> {
               });
             },
             showCursor: isPress,
-            controller: _quantityController,
+            controller: widget.quantityController,
             keyboardType: const TextInputType.numberWithOptions(
               decimal: false,
               signed: true,
@@ -375,16 +375,16 @@ class _BodyState extends State<Body> {
         ),
         GestureDetector(
           onTap: () {
-            if (_quantityController.text == "") {
-              _quantityController.text == "0";
+            if (widget.quantityController.text == "") {
+              widget.quantityController.text == "0";
             }
-            int currentQuantity = int.parse(_quantityController.text);
+            int currentQuantity = int.parse(widget.quantityController.text);
 
             setState(() {
               isPress = true;
               currentQuantity++;
-              _quantityController.text = (currentQuantity).toString();
-              merchTotal = currentQuantity * widget.price;
+              widget.quantityController.text = (currentQuantity).toString();
+              merchTotal = currentQuantity * price;
               shipTotal = currentQuantity > 0 ? shipping : 0;
               itemTotal = merchTotal + shipTotal;
             });
