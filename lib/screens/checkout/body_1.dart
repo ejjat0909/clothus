@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+//step 1 : design only
 class Body extends StatefulWidget {
   final String title;
   final double price;
@@ -23,26 +24,9 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  late double merchTotal;
-  double balance = 89.00;
-  double shipTotal = 0;
-  double shipping = 4.50;
-  double itemTotal = 0;
-  bool isPress = false;
+ 
 
-  final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _quantityController.text = "1";
-    merchTotal = widget.price;
-    itemTotal = shipTotal + merchTotal;
-    shipTotal = shipping;
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -122,10 +106,7 @@ class _BodyState extends State<Body> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
-                  controller: _nameController,
-                  onChanged: ((value) {
-                    value = _nameController.text;
-                  }),
+                
                   decoration:
                       textFieldInputDecoration("Name", "ex: Hakimi Hamdan"),
                 ),
@@ -140,10 +121,7 @@ class _BodyState extends State<Body> {
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  controller: _addressController,
-                  onChanged: ((value) {
-                    value = _addressController.text;
-                  }),
+                 
                   decoration:
                       textFieldInputDecoration("Address", "ex: Taman UMP 15"),
                 ),
@@ -167,7 +145,7 @@ class _BodyState extends State<Body> {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Wallet Balance (RM ${balance.toStringAsFixed(2)})",
+                      "Wallet Balance (RM ${0.toStringAsFixed(2)})",
                       style:  TextStyle(
                         color: ColorConstant.primaryColor,
                         fontWeight: FontWeight.w400,
@@ -219,7 +197,7 @@ class _BodyState extends State<Body> {
               Expanded(
                 flex: 1,
                 child: Text(
-                  "RM ${merchTotal.toStringAsFixed(2)}",
+                  "RM ${0.toStringAsFixed(2)}",
                   style:  TextStyle(color: ColorConstant.primaryColor, fontSize: 12),
                   textAlign: TextAlign.right,
                 ),
@@ -242,7 +220,7 @@ class _BodyState extends State<Body> {
               Expanded(
                 flex: 1,
                 child: Text(
-                  "RM ${shipTotal.toStringAsFixed(2)}",
+                  "RM ${0.toStringAsFixed(2)}",
                   style:  TextStyle(color: ColorConstant.primaryColor, fontSize: 12),
                   textAlign: TextAlign.right,
                 ),
@@ -266,7 +244,7 @@ class _BodyState extends State<Body> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  "RM ${itemTotal.toStringAsFixed(2)}",
+                  "RM ${0.toStringAsFixed(2)}",
                   style:  TextStyle(
                     color: ColorConstant.primaryColor,
                     fontSize: 18,
@@ -287,29 +265,7 @@ class _BodyState extends State<Body> {
       children: [
         GestureDetector(
           onTap: () {
-            if (_quantityController.text == "") {
-              _quantityController.text == "0";
-            }
-            int currentQuantity = int.parse(_quantityController.text);
-            if (currentQuantity > 0) {
-              setState(() {
-                isPress = true;
-                currentQuantity--;
-                _quantityController.text =
-                    (currentQuantity > 0 ? currentQuantity : 0).toString();
-
-                merchTotal =
-                    merchTotal < 0 ? 0 : currentQuantity * widget.price;
-
-                shipTotal = currentQuantity > 0 ? shipping : 0;
-
-                itemTotal = merchTotal + shipTotal;
-              });
-
-              if (balance >= itemTotal) {
-                setState(() {});
-              }
-            }
+          
           },
           child: Container(
             padding: EdgeInsets.all(1),
@@ -330,19 +286,13 @@ class _BodyState extends State<Body> {
           flex: 1,
           child: TextFormField(
             onChanged: (value) {
-              setState(() {
-                merchTotal = int.parse(value) * widget.price;
-                shipTotal = int.parse(value) > 0 ? shipping : 0;
-                itemTotal = merchTotal + shipTotal;
-              });
+             
             },
             onTap: () {
-              setState(() {
-                isPress = !isPress;
-              });
+            
             },
-            showCursor: isPress,
-            controller: _quantityController,
+            showCursor: true,
+           
             keyboardType: const TextInputType.numberWithOptions(
               decimal: false,
               signed: true,
@@ -372,19 +322,6 @@ class _BodyState extends State<Body> {
         ),
         GestureDetector(
           onTap: () {
-            if (_quantityController.text == "") {
-              _quantityController.text == "0";
-            }
-            int currentQuantity = int.parse(_quantityController.text);
-
-            setState(() {
-              isPress = true;
-              currentQuantity++;
-              _quantityController.text = (currentQuantity).toString();
-              merchTotal = currentQuantity * widget.price;
-              shipTotal = currentQuantity > 0 ? shipping : 0;
-              itemTotal = merchTotal + shipTotal;
-            });
           },
           child: Container(
             padding: EdgeInsets.all(1),
