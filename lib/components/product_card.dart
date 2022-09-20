@@ -37,7 +37,7 @@ class ProductCard extends StatelessWidget {
               ),
               child: Image.asset(
                 image, //image
-                height: 100,
+                height: MediaQuery.of(context).size.height * 0.12,
               ),
             ),
             const SizedBox(height: 10),

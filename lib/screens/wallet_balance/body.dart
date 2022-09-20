@@ -252,6 +252,7 @@ class _BodyState extends State<Body> {
               style: TextStyle(
                 color: toyyibPay,
                 fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.italic,
               ),
               children: [
                 TextSpan(
@@ -259,6 +260,7 @@ class _BodyState extends State<Body> {
                   style: TextStyle(
                     color: toyyibPay,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.normal,
                   ),
                 ),
               ],
@@ -447,6 +449,7 @@ class _BodyState extends State<Body> {
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.italic,
               ),
               children: [
                 TextSpan(
@@ -454,6 +457,7 @@ class _BodyState extends State<Body> {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.normal,
                   ),
                 ),
               ],
