@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:clothus/components/product_card.dart';
 import 'package:clothus/constant.dart';
 import 'package:clothus/main.dart';
-import 'package:clothus/models/product_model.dart';
+import 'package:clothus/models/product/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

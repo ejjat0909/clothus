@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:clothus/constant.dart';
 import 'package:clothus/helpers/secure_shared_preferences.dart';
 import 'package:clothus/services/resource.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +12,8 @@ class Webservice {
     String? token = await SecureSharedPreferences.read(key: "access_token");
 
     // Create Uri from the url define in resource file. Then add the query parameters
-    Uri uri = Uri.parse(resource.url).replace(queryParameters: resource.params);
+    Uri uri = Uri.parse(rootUrl + resource.url)
+        .replace(queryParameters: resource.params);
 
     http.Response response = await http.post(
       uri,
@@ -35,7 +37,8 @@ class Webservice {
     String? token = await SecureSharedPreferences.read(key: "access_token");
 
     // Create Uri from the url define in resource file. Then add the query parameters
-    Uri uri = Uri.parse(resource.url).replace(queryParameters: resource.params);
+    Uri uri = Uri.parse(rootUrl + resource.url)
+        .replace(queryParameters: resource.params);
 
     http.Response response = await http.get(
       uri,
@@ -55,7 +58,8 @@ class Webservice {
     // To authenticate user
     String? token = await SecureSharedPreferences.read(key: "access_token");
 
-    Uri uri = Uri.parse(resource.url).replace(queryParameters: resource.params);
+    Uri uri = Uri.parse(rootUrl + resource.url)
+        .replace(queryParameters: resource.params);
 
     http.Response response = await http.delete(
       uri,

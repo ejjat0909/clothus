@@ -1,6 +1,6 @@
 import 'package:clothus/bloc/login_bloc.dart';
 import 'package:clothus/helpers/secure_shared_preferences.dart';
-import 'package:clothus/models/user_response_model.dart';
+import 'package:clothus/models/user/user_response_model.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 
 class LoginFormBloc extends FormBloc<String, String> {

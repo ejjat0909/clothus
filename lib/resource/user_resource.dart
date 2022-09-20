@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:clothus/models/default_response_model.dart';
-import 'package:clothus/models/user_response_model.dart';
+import 'package:clothus/models/user/user_response_model.dart';
 import 'package:clothus/services/resource.dart';
 
 class UserResource {

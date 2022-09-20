@@ -1,5 +1,5 @@
 import 'package:clothus/helpers/base_api_response.dart';
-import 'package:clothus/models/user_model.dart';
+import 'package:clothus/models/user/user_model.dart';
 
 class UserResponseModel extends BaseAPIResponse<UserModel, Null> {
   UserResponseModel(fullJson) : super(fullJson);
