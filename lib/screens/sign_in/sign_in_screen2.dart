@@ -26,7 +26,6 @@ class _SignInScreenState extends State<SignInScreen> {
       body: BlocProvider(
         create: (context) => LoginFormBloc(),
         child: Builder(builder: (context) {
-          // Access form bloc
           final loginFormBloc = context.read<LoginFormBloc>();
           return FormBlocListener<LoginFormBloc, String, String>(
             onSubmitting: ((context, state) {

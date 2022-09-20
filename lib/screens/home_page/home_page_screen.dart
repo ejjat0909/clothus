@@ -7,8 +7,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class HomePageScreen extends StatefulWidget {
-  final String title;
-  const HomePageScreen({super.key, required this.title});
+  const HomePageScreen({super.key});
 
   @override
   State<HomePageScreen> createState() => _HomePageScreenState();
@@ -49,7 +48,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
         ],
         centerTitle: true,
         title: Text(
-          widget.title,
+          "ClothUs",
           style: TextStyle(color: primaryColor),
         ),
         backgroundColor: Colors.transparent,
