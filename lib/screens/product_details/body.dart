@@ -31,9 +31,9 @@ class Body extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration: const BoxDecoration(
-              color: white,
-              borderRadius: BorderRadius.only(
+            decoration:   BoxDecoration(
+              color: ColorConstant.white,
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
               ),
@@ -46,22 +46,22 @@ class Body extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     title,
-                    style: const TextStyle(color: primaryColor, fontSize: 16),
+                    style:   TextStyle(color: ColorConstant.primaryColor, fontSize: 16),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
                   const SizedBox(height: 10),
                   Text(
                     "RM ${price.toStringAsFixed(2)}",
-                    style: const TextStyle(color: primaryColor, fontSize: 16),
+                    style:   TextStyle(color: ColorConstant.primaryColor, fontSize: 16),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
                   const SizedBox(height: 20),
-                  const Text(
+                    Text(
                     "Colors",
                     style: TextStyle(
-                        color: primaryColor,
+                        color: ColorConstant.primaryColor,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,

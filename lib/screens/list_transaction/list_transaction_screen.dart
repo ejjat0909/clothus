@@ -15,17 +15,17 @@ class _ListTransactionScreenState extends State<ListTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: ColorConstant.bgColor,
       appBar: AppBar(
-          leading: const BackButton(
-            color: primaryColor,
+          leading:   BackButton(
+            color: ColorConstant.primaryColor,
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
           centerTitle: true,
-          title: const Text(
+          title:   Text(
             "List Transaction",
-            style: TextStyle(color: primaryColor),
+            style: TextStyle(color: ColorConstant.primaryColor),
           )),
           body: Body(),
     );
