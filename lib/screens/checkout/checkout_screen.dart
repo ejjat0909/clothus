@@ -1,10 +1,11 @@
-import 'package:clothus/bloc/checkout.dart';
+import 'package:clothus/bloc/checkout_bloc.dart';
 import 'package:clothus/constant.dart';
 import 'package:clothus/main.dart';
 import 'package:clothus/models/checkout_request_model.dart';
 import 'package:clothus/models/default_response_model.dart';
 import 'package:clothus/models/product/product_model.dart';
 import 'package:clothus/screens/checkout/body.dart';
+import 'package:clothus/screens/home_page/home_page_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -75,6 +76,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             if (responseModel.isSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Succesfully Checkout")));
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => HomePageScreen()),
+                  ),
+                  (Route<dynamic> route) => false);
             } else {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(responseModel.message)));

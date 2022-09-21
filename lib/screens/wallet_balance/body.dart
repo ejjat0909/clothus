@@ -1,11 +1,19 @@
+import 'dart:async';
+
+import 'package:clothus/bloc/wallet_bloc.dart';
 import 'package:clothus/components/decimal_text_input.dart';
+import 'package:clothus/components/loading_dialog.dart';
 import 'package:clothus/constant.dart';
 import 'package:clothus/main.dart';
+import 'package:clothus/models/default_response_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:inapp_browser/inapp_browser.dart';
+import 'package:swipe_refresh/swipe_refresh.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -15,6 +23,9 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  final _controller = StreamController<SwipeRefreshState>.broadcast();
+  Stream<SwipeRefreshState> get _stream => _controller.stream;
+
   bool isEnabled = false;
   bool isCard5Press = false;
   bool isCard10Press = false;
@@ -24,30 +35,57 @@ class _BodyState extends State<Body> {
   bool isCard100Press = false;
   Color hintColor = ColorConstant.primaryColor.withOpacity(0.33);
   var topupController = TextEditingController();
-  double balance = 89;
+  double balance = 0;
+
+  @override
+  void dispose() {
+    _controller.close();
+
+    super.dispose();
+  }
+
   @override
   void initState() {
+    getWalletBalance();
     topupController.text == 0.toStringAsFixed(2);
     super.initState();
   }
 
+  Future<void> getWalletBalance() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    WalletBloc walletBloc = WalletBloc();
+    DefaultResponseModel responseModel = await walletBloc.getWalletBalance();
+    if (responseModel.isSuccess) {
+      setState(() {
+        balance = responseModel.data;
+      });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(responseModel.message)));
+    }
+    _controller.sink.add(SwipeRefreshState.hidden);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
+    return SafeArea(
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: SwipeRefresh.cupertino(
+            onRefresh: () {
+              getWalletBalance();
+            },
+            stateStream: _stream,
             children: [
               balanceCard(context),
               const SizedBox(height: 20),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                   color: ColorConstant.white,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -56,7 +94,7 @@ class _BodyState extends State<Body> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:   [
+                  children: [
                     Padding(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                       child: Text(
@@ -76,7 +114,7 @@ class _BodyState extends State<Body> {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
-                decoration:   BoxDecoration(
+                decoration: BoxDecoration(
                   color: ColorConstant.white,
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
@@ -185,12 +223,24 @@ class _BodyState extends State<Body> {
               const SizedBox(height: 25),
               GestureDetector(
                 onTap: isEnabled
-                    ? () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyHomePage(title: "Topup"),
-                            ));
+                    ? () async {
+                        LoadingDialog.show(context);
+                        WalletBloc walletBloc = WalletBloc();
+                        DefaultResponseModel responseModel =
+                            await walletBloc.topup(topupController.value.text);
+                        LoadingDialog.hide(context);
+
+                        if (responseModel.isSuccess &&
+                            responseModel.data != null) {
+                          // openBrowser(responseModel.data);
+                          openInAppBrowser(responseModel.data);
+                          setState(() {
+                            topupController.text = "";
+                          });
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(responseModel.message)));
+                        }
                       }
                     : null,
                 child: Container(
@@ -198,9 +248,11 @@ class _BodyState extends State<Body> {
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: isEnabled ? ColorConstant.primaryColor : Colors.grey[600],
+                    color: isEnabled
+                        ? ColorConstant.primaryColor
+                        : Colors.grey[600],
                   ),
-                  child:   Center(
+                  child: Center(
                     child: Text(
                       "Topup Now",
                       style: TextStyle(
@@ -217,6 +269,11 @@ class _BodyState extends State<Body> {
     );
   }
 
+  Future<void> openInAppBrowser(String billId) async {
+    InappBrowser.showPopUpBrowser(
+        context, Uri.parse("https://dev.toyyibpay.com/$billId"));
+  }
+
   Widget paymentGateway() {
     return Container(
       width: double.infinity,
@@ -229,7 +286,7 @@ class _BodyState extends State<Body> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children:   [
+            children: [
               Icon(
                 Icons.payments_rounded,
                 color: ColorConstant.primaryColor,
@@ -247,7 +304,7 @@ class _BodyState extends State<Body> {
           ),
           const SizedBox(height: 5),
           RichText(
-            text:   TextSpan(
+            text: TextSpan(
               text: "toyyib",
               style: TextStyle(
                 color: ColorConstant.toyyibPay,
@@ -266,27 +323,6 @@ class _BodyState extends State<Body> {
               ],
             ),
           ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-                  Text(
-                'Total Top Up',
-                style: TextStyle(
-                  color: ColorConstant.primaryColor,
-                ),
-              ),
-              Text(
-                topupController.text == ""
-                    ? "RM 0.00"
-                    : "RM ${topupController.text}",
-                style:   TextStyle(
-                  color: ColorConstant.primaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
-            ],
-          )
         ],
       ),
     );
@@ -373,12 +409,13 @@ class _BodyState extends State<Body> {
             cursorColor: ColorConstant.primaryColor,
             textAlign: TextAlign.start,
             style: TextStyle(color: ColorConstant.primaryColor, fontSize: 18),
-            decoration:   InputDecoration(
+            decoration: InputDecoration(
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
                   "RM ",
-                  style: TextStyle(fontSize: 18, color: ColorConstant.primaryColor),
+                  style: TextStyle(
+                      fontSize: 18, color: ColorConstant.primaryColor),
                 ),
               ),
               prefixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
@@ -392,7 +429,8 @@ class _BodyState extends State<Body> {
                 gapPadding: 10,
               ),
               focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorConstant.bgColor), gapPadding: 10),
+                  borderSide: BorderSide(color: ColorConstant.bgColor),
+                  gapPadding: 10),
               contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),
@@ -419,7 +457,7 @@ class _BodyState extends State<Body> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-                Text(
+              Text(
                 "Available Balance",
                 style: TextStyle(
                   color: ColorConstant.bgColor,
@@ -436,7 +474,7 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 25),
           Text(
             "RM ${balance.toStringAsFixed(2)}",
-            style:   TextStyle(
+            style: TextStyle(
               color: ColorConstant.bgColor,
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -485,7 +523,7 @@ class _BodyState extends State<Body> {
           child: Center(
             child: Text(
               "RM ${total.toString()}",
-              style:   TextStyle(
+              style: TextStyle(
                 color: ColorConstant.primaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 18,

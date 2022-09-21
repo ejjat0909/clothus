@@ -8,7 +8,7 @@ class CheckoutBloc {
   Future<DefaultResponseModel> checkout(
       CheckoutRequestModel checkoutRequestModel) async {
     // Revoked User Token
-    return await Webservice.get(
+    return await Webservice.post(
         CheckoutResource.checkout(checkoutRequestModel));
   }
 }
