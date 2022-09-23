@@ -10,7 +10,7 @@ class LoadingDialog extends StatelessWidget {
       ).then((_) => FocusScope.of(context).requestFocus(FocusNode()));
 
   static void hide(BuildContext context) => Navigator.pop(context);
-
+// this is for loading indicator
   LoadingDialog({Key? key}) : super(key: key);
 
   @override
