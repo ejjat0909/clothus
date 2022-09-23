@@ -1,6 +1,7 @@
 import 'package:clothus/bloc/login_bloc.dart';
 import 'package:clothus/components/input_decoration.dart';
 import 'package:clothus/components/loading_dialog.dart';
+import 'package:clothus/components/primary_button.dart';
 import 'package:clothus/constant.dart';
 import 'package:clothus/form_bloc/login_form_bloc.dart';
 import 'package:clothus/helpers/secure_shared_preferences.dart';
@@ -114,28 +115,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                     textFieldInputDecoration("Password", ""),
                               ),
                               const SizedBox(height: 20),
-                              GestureDetector(
-                                onTap: () {
-                                  if (validateAndSave()) {
-                                    loginProcess(_loginRequestModel);
-                                  }
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                    color: ColorConstant.primaryColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "Sign In",
-                                      style: TextStyle(
-                                        color: ColorConstant.bgColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              PrimaryButton(
+                                  text: "Sign In",
+                                  color: ColorConstant.primaryColor,
+                                  press: () {
+                                    if (validateAndSave()) {
+                                      loginProcess(_loginRequestModel);
+                                    }
+                                  }),
                             ],
                           ),
                         ),
