@@ -1,15 +1,20 @@
 import 'dart:convert';
 
 import 'package:clothus/constant.dart';
-import 'package:clothus/helpers/secure_shared_preferences.dart';
+
+
+import 'package:clothus/helpers/shared_preferences.dart';
 import 'package:clothus/services/resource.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Webservice {
   // API request using POST method
   static Future post(Resource resource) async {
     // To authenticate user
-    String? token = await SecureSharedPreferences.read(key: "access_token");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("access_token");
 
     // Create Uri from the url define in resource file. Then add the query parameters
     Uri uri = Uri.parse(rootUrl + resource.url)
@@ -34,7 +39,9 @@ class Webservice {
   // API request using GET method
   static Future get(Resource resource) async {
     // To authenticate user
-    String? token = await SecureSharedPreferences.read(key: "access_token");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("access_token");
 
     // Create Uri from the url define in resource file. Then add the query parameters
     Uri uri = Uri.parse(rootUrl + resource.url)
@@ -56,7 +63,9 @@ class Webservice {
   // API request using DELETE method
   static Future delete(Resource resource) async {
     // To authenticate user
-    String? token = await SecureSharedPreferences.read(key: "access_token");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("access_token");
 
     Uri uri = Uri.parse(rootUrl + resource.url)
         .replace(queryParameters: resource.params);

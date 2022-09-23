@@ -1,5 +1,5 @@
 import 'package:clothus/bloc/login_bloc.dart';
-import 'package:clothus/helpers/secure_shared_preferences.dart';
+
 import 'package:clothus/models/user/login_request_model.dart';
 import 'package:clothus/models/user/user_model.dart';
 import 'package:clothus/models/user/user_response_model.dart';
@@ -48,8 +48,8 @@ class LoginFormBloc extends FormBloc<String, String> {
       if (userResponseModel.isSuccess &&
           userResponseModel.data!.accessToken != null) {
         // Save access_token
-        await SecureSharedPreferences.write(
-            key: "access_token", value: userResponseModel.data!.accessToken!);
+        // await SecureSharedPreferences.write(
+        //     key: "access_token", value: userResponseModel.data!.accessToken!);
         // Trigger success event
         emitSuccess();
       } else {

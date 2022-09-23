@@ -4,13 +4,14 @@ import 'package:clothus/components/loading_dialog.dart';
 import 'package:clothus/components/primary_button.dart';
 import 'package:clothus/constant.dart';
 import 'package:clothus/form_bloc/login_form_bloc.dart';
-import 'package:clothus/helpers/secure_shared_preferences.dart';
+import 'package:clothus/helpers/shared_preferences.dart';
 import 'package:clothus/models/default_response_model.dart';
 import 'package:clothus/models/user/login_request_model.dart';
 import 'package:clothus/models/user/user_response_model.dart';
 import 'package:clothus/screens/home_page/home_page_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Step 1: Design only
 class SignInScreen extends StatefulWidget {
@@ -146,8 +147,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (responseModel.isSuccess) {
       // Save access_token
-      await SecureSharedPreferences.write(
-          key: "access_token", value: responseModel.data!.accessToken!);
+      //await SharedPref.save("access_token", responseModel.data!.accessToken!,);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("access_token", responseModel.data!.accessToken!);
+
       Navigator.push(
         context,
         MaterialPageRoute(

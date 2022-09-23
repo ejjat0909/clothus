@@ -1,5 +1,4 @@
 import 'package:clothus/helpers/http_response.dart';
-import 'package:clothus/helpers/secure_shared_preferences.dart';
 import 'package:clothus/models/default_response_model.dart';
 import 'package:clothus/models/user/login_request_model.dart';
 import 'package:clothus/models/user/user_response_model.dart';
